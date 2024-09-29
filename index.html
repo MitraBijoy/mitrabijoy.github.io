@@ -29,60 +29,12 @@
             position: fixed;
             height: 100%;
             overflow: hidden;
-            transition: background-color 0.3s ease, transform 0.4s ease;
+            transition: background-color 0.5s ease, transform 0.4s ease;
         }
 
         .sidebar:hover {
             background-color: #e0e0e0;
         }
-
-        .sidebar img {
-            width: 100%;
-            border-radius: 5%;
-            margin-bottom: 25px;
-            transition: transform 0.4s ease;
-        }
-
-        .sidebar img:hover {
-            transform: scale(1.05);
-        }
-
-        .sidebar h1 {
-            font-size: 2.3em;
-            margin: 0 0 10px;
-            font-family: Georgia, serif;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        .sidebar p {
-            text-align: center;
-            font-size: .9em;
-            font-family: Georgia, serif;
-            margin-bottom: 20px;
-            animation: fadeIn 1.2s ease-in-out;
-        }
-
-        .social-links {
-            text-align: center;
-            margin-bottom: 20px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .social-links a {
-            display: block;
-            text-decoration: none;
-            color: #333;
-            font-family: Georgia, serif;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: #3498db;
-        }
-
         .content {
             margin-left: 250px;
             padding: 20px;
@@ -282,29 +234,190 @@
 </head>
 <body>
     <!-- Sidebar with fixed content -->
-    <div class="sidebar">
-        <img src="https://raw.githubusercontent.com/MitraBijoy/mitrabijoy.github.io/refs/heads/main/mitra.jpeg" alt="!!!....!!!">
-        <h1>Bijoy Mitra</h1>
-        <div class="social-links">
-            <a href="mailto:bijoymitra11@gmail.com" target="_blank">Email</a>
-            <a href="https://www.scopus.com/authid/detail.uri?authorId=57813102100" target="_blank">Scopus</a>
-            <a href="https://orcid.org/0000-0002-3008-831X" target="_blank">ORCID</a>
-            <a href="https://github.com/MitraBijoy" target="_blank">GitHub</a>
-            <a href="https://www.researchgate.net/profile/Bijoy-Mitra" target="_blank">ResearchGate</a>
-            <a href="https://linkedin.com/in/bijoy-mitra-673b4b17b" target="_blank">LinkedIn</a>
-            <a href="https://www.facebook.com/mitra.bijoy.ml?mibextid=ZbWKwL" target="_blank">Facebook</a>
-        </div>
-    </div>
+	<div class="sidebar">
+		<!-- Profile Image -->
+		<div class="profile">
+			<a href="BM.html" target="_blank">
+				<img src="https://raw.githubusercontent.com/MitraBijoy/mitrabijoy.github.io/refs/heads/main/mitra.jpeg" alt="Bijoy Mitra">
+			</a>
+
+		</div>
+
+		<!-- Name -->
+		<h1>Bijoy Mitra</h1>
+
+		<!-- Social Links -->
+		<div class="social-links">
+			<a href="mailto:bijoymitra11@gmail.com" target="_blank" title="Email">
+				<img src="https://super.abril.com.br/wp-content/uploads/2018/07/istock-510576580.jpg?crop=1&resize=1212,909" alt="Email">
+			</a>
+			<a href="https://www.scopus.com/authid/detail.uri?authorId=57813102100" target="_blank" title="Scopus">
+				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHyim7li8FOQsWVEj1it-oZ6KY_9fdhP8EkA&s" alt="Scopus">
+			</a>
+			<a href="https://orcid.org/0000-0002-3008-831X" target="_blank" title="ORCID">
+				<img src="https://static-00.iconduck.com/assets.00/orcid-icon-2048x2048-q87cnnge.png" alt="ORCID">
+			</a>
+			<a href="https://github.com/MitraBijoy" target="_blank" title="GitHub">
+				<img src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png" alt="GitHub">
+			</a>
+			<a href="https://www.researchgate.net/profile/Bijoy-Mitra" target="_blank" title="ResearchGate">
+				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ResearchGate_icon_SVG.svg/2048px-ResearchGate_icon_SVG.svg.png" alt="ResearchGate">
+			</a>
+			<a href="https://linkedin.com/in/bijoy-mitra-673b4b17b" target="_blank" title="LinkedIn">
+				<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+			</a>
+			<a href="https://www.facebook.com/mitra.bijoy.ml?mibextid=ZbWKwL" target="_blank" title="Facebook">
+				<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/2048px-Facebook_f_logo_%282021%29.svg.png" alt="Facebook">
+			</a>
+		</div>
+	</div>
+
+	<!-- CSS for responsiveness and enhanced design -->
+	<style>
+		/* Base sidebar styling */
+		.sidebar {
+			width: 250px;
+			padding: 20px;
+			background-color: #f4f4f4;
+			border-right: 2px solid #ccc;
+			position: fixed;
+			top: 100;
+			left: 0;
+			height: 100vh;
+			box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			overflow-y: auto;
+			z-index: 999;
+		}
+
+		/* Profile Image */
+		.profile img {
+			margin-top: 75px;
+			width: 200px;
+			height: 300px;
+			border-radius: 5%;
+			border: 1px solid #007bff;
+			object-fit: cover;
+			transition: transform 0.5s;
+		}
+
+		/* Name styling */
+		.sidebar h1 {
+			text-align: center;
+			font-family: Harrington;
+			color: #333;
+			font-size: 34px;
+			margin: 10px 0;
+		}
+
+		/* Social Links Grid */
+		.social-links {
+			display: grid;
+			grid-template-columns: repeat(3, 1fr);
+			gap: 15px;
+			justify-items: center;
+			margin-top: 20px;
+		}
+
+		/* Social icons */
+		.social-links img {
+			width: 30px;
+			height: 30px;
+			transition: transform 0.3s, opacity 0.3s;
+		}
+
+		/* Hover effect on social links */
+		.social-links img:hover {
+			transform: scale(1.2);
+			opacity: 0.8;
+		}
+
+		/* Media Query for smaller screens */
+		@media (max-width: 768px) {
+			.sidebar {
+				width: 200px;
+				padding: 10px;
+			}
+
+			.profile img {
+				width: 80px;
+				height: 80px;
+			}
+
+			.sidebar h1 {
+				font-family: Gill Sans, Verdana;
+				font-size: 20px;
+			}
+
+			.social-links img {
+				width: 25px;
+				height: 25px;
+			}
+		}
+
+		@media (max-width: 576px) {
+			.sidebar {
+				width: 100%;
+				height: auto;
+				position: relative;
+				padding: 15px;
+			}
+
+			.social-links {
+				grid-template-columns: repeat(4, 1fr);
+				gap: 10px;
+			}
+		}
+	</style>
 
     <!-- Scrollable content -->
     <div class="content">
-        <img src="https://mrwallpaper.com/images/hd/3840x1080-hd-dual-monitor-earth-surface-pv2ialgya0agl9ie.jpg" 
-             alt="404!" style="height: 400px; width: 100%; display: block; margin: 20px auto;">
+        <div class="slideshow-container">
+			<div class="mySlides">
+				<img src="https://mrwallpaper.com/images/hd/3840x1080-hd-dual-monitor-earth-surface-pv2ialgya0agl9ie.jpg" style="width:100%; height: 450px;">
+			</div>
+
+			<div class="mySlides">
+				<img src="https://www.esri.com/about/newsroom/wp-content/uploads/2020/04/arcnews-banner-fromthemeridian_wide.jpg" style="width:100%; height: 450px;">
+			</div>
+
+			<div class="mySlides">
+				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_earth_at_night.jpg/2560px-The_earth_at_night.jpg" style="width:100%; height: 450px;">
+			</div>
+
+			<div class="mySlides">
+				<img src="https://cms.pm/uploads/hdsurveying.seesite.biz_--_9204324.jpg" style="width:100%; height: 450px;">
+			</div>
+			
+			<div class="mySlides">
+				<img src="https://cdn.wallpapersafari.com/80/11/BwJXfN.jpg" style="width:100%; height: 450px;">
+			</div>
+		</div>
+
+		<script>
+		let slideIndex = 0;
+		showSlides();
+
+		function showSlides() {
+			let slides = document.getElementsByClassName("mySlides");
+			for (let i = 0; i < slides.length; i++) {
+				slides[i].style.display = "none";  
+			}
+			slideIndex++;
+			if (slideIndex > slides.length) {slideIndex = 1}    
+			slides[slideIndex-1].style.display = "block";  
+			setTimeout(showSlides, 3000); // Change image every 3 seconds
+		}
+		</script>
 
 
         <h2 style="text-align: left; font-family: 
 		DejaVu Sans Mono, monospace; font-style: italic;
 		font-size: 1.8em;">Welcome!</h2>
+
         <p>Hi, my name is Bijoy Mitra. I have completed my undergraduate degree in Geography and Environmental Studies from the University of Chittagong, Bangladesh.
 		I am actively involved in academic projects and research collaborations. 
 		Please feel free to reach out to me for academic or professional inquiries!</p>
@@ -321,14 +434,7 @@
             <li>Landuse and Landcover Monitoring</li>
             <li>Environmental data analysis using machine learning</li>
         </ul>
-		<p style="text-align: left; margin-top: 10px;"> 
-		Bijoy Mitra has extensively studied the impact of climate change-induced sea level rise on coastal demography, focusing on the socioeconomic consequences for vulnerable populations. 
-		His research includes the development of predictive models for forest-water canopy dynamics and marine algal blooms using advanced machine-learning techniques. 
-		He has applied remote sensing technologies to analyze the spatial distribution of urban and oceanic airborne pollution, identifying pollution hotspots and their potential health risks. 
-		Additionally, he has forecasted future greenhouse gas (GHG) emissions by integrating deep neural networks with the IPCC’s shared socioeconomic pathways (SSPs). 
-		This combination of machine learning, remote sensing, and climate modeling helps to provide a comprehensive view of environmental challenges. 
-		His work aims to guide policy interventions and develop sustainable strategies for climate resilience, making significant contributions to global environmental science. 
-		<p>
+		
     </div>
 
     <!-- Floating Menu Button -->
@@ -337,7 +443,7 @@
     <!-- Hidden Menu -->
     <div class="menu" id="menu">
         <a style="font-family: 'Courier', monospace;" href="mitra_publications.html" target="_blank">Research Publications</a>
-        <a style="font-family: 'Courier', monospace;" href="error" target="_blank">CV</a>
+        <a style="font-family: 'Courier', monospace;" href="Sorry.html" target="_blank">CV</a>
         <a style="font-family: 'Courier', monospace;" href="mentors.html" target="_blank">My Mentors</a>
     </div>
 
