@@ -1,97 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mitra!...Menu</title>
+    <title>Mitra...!!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <style>
-        /* Universal reset for margin and padding */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Cursive, Brush Script MT;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-            background-color: #eef2eb; /* Light grey background */
-            transition: background-color 0.3s ease;
-        }
-
-        .sidebar {
-            width: 250px;
-            background-color: #f4f4f4;
-            padding: 20px;
-            box-sizing: border-box;
-            position: fixed;
-            height: 100%;
-            overflow: hidden;
-            transition: background-color 0.5s ease, transform 0.4s ease;
-        }
-
-        .sidebar:hover {
-            background-color: #e0e0e0;
-        }
-        .content {
-            margin-left: 250px;
-            padding: 20px;
-            box-sizing: border-box;
-            overflow-y: auto;
-            height: 100vh;
-            animation: slideInContent 0.8s ease;
-        }
-
-        .content h2 {
-            margin-top: 30px;
-            font-size: 1.8em;
-            color: #333;
-            animation: fadeInUp 0.8s ease-in-out;
-        }
-
-        .content p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        .content img {
-            height: 400px;
-            width: 100%;
-            display: block;
-            margin: 20px auto;
-            border-radius: 10px;
-            transition: transform 0.4s ease;
-        }
-
-        .content img:hover {
-            transform: scale(1.05);
-        }
-
-        .content ul {
-            animation: fadeInUp 1.2s ease-in-out;
-        }
-
-        .content li {
-            list-style: none;
-            font-size: 1.1em;
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .content li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: #3498db;
-            font-size: 1.5em;
-            line-height: 1;
-            top: -2px;
-        }
-
         /* Floating Button for Menu */
         .floating-menu-button {
             position: fixed;
@@ -105,6 +23,7 @@
             font-size: 24px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.4s ease;
+            z-index: 1000;
         }
 
         .floating-menu-button:hover {
@@ -112,348 +31,446 @@
             transform: rotate(180deg);
         }
 
+        /* Overlay Effect */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            display: block;
+            opacity: 1;
+        }
+
         /* Hidden Menu */
         .menu {
-            display: none;
             position: fixed;
-            top: 80px;
-            right: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            animation: slideIn 0.4s ease forwards;
-            opacity: 0;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            box-shadow: -5px 0px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 40px;
+            transform: translateX(0);
+            z-index: 1000;
+            transition: transform 0.5s ease;
+        }
+
+        .menu.show {
+            transform: translateX(-300px);
         }
 
         .menu a {
-            display: block;
             text-decoration: none;
-            color: #333;
-            font-size: 1.2em;
-            margin-bottom: 10px;
+            color: white;
+            font-size: 1.4em;
+            font-family: 'Courier', monospace;
             transition: color 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .menu.show a {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
 
         .menu a:hover {
             color: #2980b9;
         }
 
-        /* Animations */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #27ae60;
+            --background-color: #ecf0f1;
+            --text-color: #333;
+            --transition: all 0.3s ease;
         }
 
-        @keyframes slideInContent {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .container {
+            display: flex;
+            min-height: 100vh;
         }
 
-        /* Menu toggle active */
-        .menu.show {
-            display: block;
+        .sidebar {
+            width: 60px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+            overflow: hidden;
+            z-index: 1000;
+            position: fixed;
+            height: 100%;
+        }
+
+        .sidebar:hover {
+            width: 280px;
+        }
+
+        .sidebar-content {
+            padding: 2rem;
+            opacity: 0;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+
+        .sidebar:hover .sidebar-content {
             opacity: 1;
-            animation: slideIn 0.4s ease-in-out;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-
-            .content {
-                margin-left: 200px;
-            }
-
-            .floating-menu-button {
-                top: 10px;
-                right: 10px;
-            }
-
-            .menu {
-                top: 70px;
-                right: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sidebar {
-                width: 150px;
-            }
-
-            .content {
-                margin-left: 150px;
-                padding: 10px;
-            }
-
-            .floating-menu-button {
-                padding: 10px;
-                font-size: 18px;
-            }
-
-            .menu a {
-                font-size: 1em;
-            }
-        }
-
-    </style>
-</head>
-<body>
-    <!-- Sidebar with fixed content -->
-	<div class="sidebar">
-		<!-- Profile Image -->
-		<div class="profile">
-			<a href="BM.html" target="_blank">
-				<img src="https://raw.githubusercontent.com/MitraBijoy/mitrabijoy.github.io/refs/heads/main/mitra.jpeg" alt="Bijoy Mitra">
-			</a>
-
-		</div>
-
-		<!-- Name -->
-		<h1>Bijoy Mitra</h1>
-
-		<!-- Social Links -->
-		<div class="social-links">
-			<a href="mailto:bijoymitra11@gmail.com" target="_blank" title="Email">
-				<img src="https://super.abril.com.br/wp-content/uploads/2018/07/istock-510576580.jpg?crop=1&resize=1212,909" alt="Email">
-			</a>
-			<a href="https://www.scopus.com/authid/detail.uri?authorId=57813102100" target="_blank" title="Scopus">
-				<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHyim7li8FOQsWVEj1it-oZ6KY_9fdhP8EkA&s" alt="Scopus">
-			</a>
-			<a href="https://orcid.org/0000-0002-3008-831X" target="_blank" title="ORCID">
-				<img src="https://static-00.iconduck.com/assets.00/orcid-icon-2048x2048-q87cnnge.png" alt="ORCID">
-			</a>
-			<a href="https://github.com/MitraBijoy" target="_blank" title="GitHub">
-				<img src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png" alt="GitHub">
-			</a>
-			<a href="https://www.researchgate.net/profile/Bijoy-Mitra" target="_blank" title="ResearchGate">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/ResearchGate_icon_SVG.svg/2048px-ResearchGate_icon_SVG.svg.png" alt="ResearchGate">
-			</a>
-			<a href="https://linkedin.com/in/bijoy-mitra-673b4b17b" target="_blank" title="LinkedIn">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
-			</a>
-			<a href="https://www.facebook.com/mitra.bijoy.ml?mibextid=ZbWKwL" target="_blank" title="Facebook">
-				<img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Facebook_f_logo_%282021%29.svg/2048px-Facebook_f_logo_%282021%29.svg.png" alt="Facebook">
-			</a>
-		</div>
-	</div>
-
-	<!-- CSS for responsiveness and enhanced design -->
-	<style>
-		/* Base sidebar styling */
-		.sidebar {
-			width: 250px;
-			padding: 20px;
-			background-color: #f4f4f4;
-			border-right: 2px solid #ccc;
-			position: fixed;
-			top: 100;
-			left: 0;
-			height: 100vh;
-			box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.1);
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: flex-start;
-			overflow-y: auto;
-			z-index: 999;
-		}
-
-		/* Profile Image */
-		.profile img {
+        .profile img {
 			margin-top: 75px;
-			width: 200px;
-			height: 300px;
+			width: 210px;
+			height: 310px;
 			border-radius: 5%;
 			border: 1px solid #007bff;
 			object-fit: cover;
 			transition: transform 0.5s;
-		}
+        }
 
-		/* Name styling */
-		.sidebar h1 {
+        .profile img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .sidebar h1 {
+            font-family: 'Brush Script MT', cursive;
+            color: #fff;
+            font-size: 1.8rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            justify-items: center;
+            margin-top: 20px;
+        }
+
+        .social-links img {
+            width: 25px;
+            height: 25px;
+            transition: transform 0.3s, opacity 0.3s;
+        }
+
+        /* Hover effect on social links */
+        .social-links img:hover {
+            transform: scale(1.2);
+            opacity: 0.8;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 60px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .hero {
+			position: relative;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			background: 
+				linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+				url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80'),
+				url('https://mrwallpaper.com/images/hd/3840x1080-hd-dual-monitor-earth-surface-pv2ialgya0agl9ie.jpg');
+			background-size: cover;
+			background-position: center;
+			color: #fff;
 			text-align: center;
-			font-family: Harrington;
-			color: #333;
-			font-size: 34px;
-			margin: 10px 0;
+			padding: 2rem;
+			height: 100vh;
 		}
 
-		/* Social Links Grid */
-		.social-links {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			gap: 15px;
-			justify-items: center;
-			margin-top: 20px;
-		}
 
-		/* Social icons */
-		.social-links img {
-			width: 30px;
-			height: 30px;
-			transition: transform 0.3s, opacity 0.3s;
-		}
+        .hero h2 {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
 
-		/* Hover effect on social links */
-		.social-links img:hover {
-			transform: scale(1.2);
-			opacity: 0.8;
-		}
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
 
-		/* Media Query for smaller screens */
-		@media (max-width: 768px) {
-			.sidebar {
-				width: 200px;
-				padding: 10px;
-			}
+        .cta-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-			.profile img {
-				width: 80px;
-				height: 80px;
-			}
+        .cta-button:hover {
+            background-color: #1e8449;
+            transform: scale(1.05);
+        }
 
-			.sidebar h1 {
-				font-family: Gill Sans, Verdana;
-				font-size: 20px;
-			}
+        .research-interests {
+            background-color: transparent;
+            color: white;
+            padding: 1rem;
+            width: 100%;
+        }
 
-			.social-links img {
-				width: 25px;
-				height: 25px;
-			}
-		}
+        .research-interests h2 {
+            font-family: 'Brush Script MT', cursive;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
 
-		@media (max-width: 576px) {
-			.sidebar {
-				width: 100%;
-				height: auto;
-				position: relative;
-				padding: 15px;
-			}
+        .research-interests .interest-cards {
+            display: flex;
+            justify-content: space-around;
+            color: white;
+            gap: 1rem;
+        }
 
-			.social-links {
-				grid-template-columns: repeat(4, 1fr);
-				gap: 10px;
-			}
-		}
-	</style>
+        .interest-card {
+            font-family: 'Cursive', cursive;
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
 
-    <!-- Scrollable content -->
-    <div class="content">
-        <div class="slideshow-container">
-			<div class="mySlides">
-				<img src="https://mrwallpaper.com/images/hd/3840x1080-hd-dual-monitor-earth-surface-pv2ialgya0agl9ie.jpg" style="width:100%; height: 450px;">
-			</div>
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 50px;
+            }
 
-			<div class="mySlides">
-				<img src="https://www.esri.com/about/newsroom/wp-content/uploads/2020/04/arcnews-banner-fromthemeridian_wide.jpg" style="width:100%; height: 450px;">
-			</div>
+            .sidebar:hover {
+                width: 200px;
+            }
 
-			<div class="mySlides">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/The_earth_at_night.jpg/2560px-The_earth_at_night.jpg" style="width:100%; height: 450px;">
-			</div>
+            .hero h2 {
+                font-size: 2rem;
+            }
 
-			<div class="mySlides">
-				<img src="https://cms.pm/uploads/hdsurveying.seesite.biz_--_9204324.jpg" style="width:100%; height: 450px;">
-			</div>
-			
-			<div class="mySlides">
-				<img src="https://cdn.wallpapersafari.com/80/11/BwJXfN.jpg" style="width:100%; height: 450px;">
-			</div>
-		</div>
+            .hero p {
+                font-size: 1rem;
+            }
 
-		<script>
-		let slideIndex = 0;
-		showSlides();
+            .interest-card {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
 
-		function showSlides() {
-			let slides = document.getElementsByClassName("mySlides");
-			for (let i = 0; i < slides.length; i++) {
-				slides[i].style.display = "none";  
-			}
-			slideIndex++;
-			if (slideIndex > slides.length) {slideIndex = 1}    
-			slides[slideIndex-1].style.display = "block";  
-			setTimeout(showSlides, 3000); // Change image every 3 seconds
-		}
-		</script>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-content">
+                <div class="profile">
+                    <a href="BM.html" target="_blank">
+						<img src="https://raw.githubusercontent.com/MitraBijoy/mitrabijoy.github.io/refs/heads/main/mitra.jpeg" alt="Bijoy Mitra">
+					</a>
+                </div>
+                <h1>Bijoy Mitra</h1>
+                <!-- Social Links Section -->
+                <div class="social-links">
+                    <a href="mailto:bijoymitra11@gmail.com" target="_blank" title="Email">
+                        <img src="https://super.abril.com.br/wp-content/uploads/2018/07/istock-510576580.jpg?crop=1&resize=1212,909" alt="Email">
+                    </a>
+                    <a href="https://scholar.google.com/citations?hl=en&user=K5sHNxIAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" title="GScholar">
+                        <img src="https://banner2.cleanpng.com/20180503/slq/avdrvwzso.webp" alt="GScholar">
+                    </a>
+                    <a href="https://www.scopus.com/authid/detail.uri?authorId=57813102100" target="_blank" title="Scopus">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHyim7li8FOQsWVEj1it-oZ6KY_9fdhP8EkA&s" alt="Scopus">
+                    </a>
+                    <a href="https://orcid.org/0000-0002-3008-831X" target="_blank" title="ORCID">
+                        <img src="https://static-00.iconduck.com/assets.00/orcid-icon-2048x2048-q87cnnge.png" alt="ORCID">
+                    </a>
+                    <a href="https://github.com/MitraBijoy" target="_blank" title="GitHub">
+                        <img src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png" alt="GitHub">
+                    </a>
+                    <a href="https://linkedin.com/in/bijoy-mitra-673b4b17b" target="_blank" title="LinkedIn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
+                    </a>
+                </div>
+            </div>
+        </div>
 
+		<div class="main-content">
+            <div class="hero">
+                <div class="hero-text-container">
+                    <h2 class="hero-heading">Searching Sustainable Possibilities</h2>
+				</div>
 
-        <h2 style="text-align: left; font-family: 
-		DejaVu Sans Mono, monospace; font-style: italic;
-		font-size: 1.8em;">Welcome!</h2>
+                <style>
+                    /* Hero Text Container */
+                    .hero-text-container {
+                        text-align: center;
+                        color: #fff;
+                        padding: 20px;
+                        max-width: 800px;
+                        margin: 0 auto;
+                        animation: fadeInUp 1.5s ease-in-out;
+                    }
 
-        <p>Hi, my name is Bijoy Mitra. I have completed my undergraduate degree in Geography and Environmental Studies from the University of Chittagong, Bangladesh.
-		I am actively involved in academic projects and research collaborations. 
-		Please feel free to reach out to me for academic or professional inquiries!</p>
+                    /* Gradient Text Effect for Heading */
+                    .hero-heading {
+						font-size: 3rem;
+						background: linear-gradient(90deg, #27ae60, #2c3e50);
+						background-clip: text;
+						-webkit-background-clip: text;
+						color: transparent;
+						font-weight: bold;
+						text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
+						margin-bottom: 1rem;
+						animation: zoomIn 1.5s ease;
+						transition: transform 0.3s ease;
+                    }
+					.hero-heading:hover {
+						transform: scale(1.1);
+						cursor: pointer;
+					}
 
-        <h2 style="text-align: left; font-family: 
-		DejaVu Sans Mono, monospace; font-style: italic;
-		font-size: 1.8em;">Research Interests</h2>
-        <p style="text-align: left;">My research goals are to promote sustainable and climate change resilient strategies, focusing on overcoming climatic challenges. Some key areas of interest:</p>
-        <ul style="text-align: left; margin-top: 10px;">
-            <li>Climate Change and Resiliance</li>
-            <li>GIS & Geospatial Analysis</li>
-            <li>Remote Sensing</li>
-			<li>Real-time Air Quality Monitoring</li>
-            <li>Landuse and Landcover Monitoring</li>
-            <li>Environmental data analysis using machine learning</li>
-        </ul>
-		
+                    /* Semi-transparent background for the subheading */
+                    .hero-subheading {
+                        font-size: 1.2rem;
+                        background-color: rgba(0, 0, 0, 0.4);
+                        padding: 10px 20px;
+                        border-radius: 10px;
+                        display: inline-block;
+                        text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+                        animation: fadeIn 1.5s ease-in-out;
+                    }
+
+                    /* Keyframe animations */
+                    @keyframes fadeInUp {
+                        0% {
+                            opacity: 0;
+                            transform: translateY(50px);
+                        }
+                        100% {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+
+                    @keyframes zoomIn {
+                        0% {
+                            opacity: 0;
+                            transform: scale(0.8);
+                        }
+                        100% {
+                            opacity: 1;
+                            transform: scale(1);
+                        }
+                    }
+
+                    @keyframes fadeIn {
+                        0% {
+                            opacity: 0;
+                        }
+                        100% {
+                            opacity: 1;
+                        }
+                    }
+
+                    /* For smaller devices */
+                    @media (max-width: 768px) {
+                        .hero-heading {
+                            font-size: 2.2rem;
+                        }
+
+                        .hero-subheading {
+                            font-size: 1rem;
+                        }
+                    }
+                </style>
+
+                <!-- Research Interests section inside the hero -->
+                <section class="research-interests">
+                    <!--h2>Research Interests</h2-->
+                    <div class="interest-cards">
+                        <div class="interest-card">Climate Resilience</div>
+                        <div class="interest-card">GIS & Analysis</div>
+                        <div class="interest-card">Remote Sensing</div>
+                        <div class="interest-card">Air Quality</div>
+                        <div class="interest-card">Land Use</div>
+                        <div class="interest-card">Data Analysis</div>
+                    </div>
+                </section>
+            </div>
+        </div>
     </div>
 
     <!-- Floating Menu Button -->
     <button class="floating-menu-button" onclick="toggleMenu()">:::</button>
 
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
     <!-- Hidden Menu -->
     <div class="menu" id="menu">
-		<a style="font-family: 'Courier', monospace;" href="mentors.html" target="_blank">My Mentors</a>
-        <a style="font-family: 'Courier', monospace;" href="mitra_publications.html" target="_blank">Research Publications</a>
-        <a style="font-family: 'Courier', monospace;" href="Sorry.html" target="_blank">Resources</a>
-        <a style="font-family: 'Courier', monospace;" href="Sorry.html" target="_blank">Curriculum Vitae</a>
+        <a href="mentors.html" target="_blank">My Mentors</a>
+        <a href="mitra_publications.html" target="_blank">Research Publications</a>
+        <a href="Sorry.html" target="_blank">Resources</a>
+        <a href="Sorry.html" target="_blank">Curriculum Vitae</a>
     </div>
 
     <script>
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            menu.classList.toggle('show');
-        }
-    </script>
+		function toggleMenu() {
+			const menu = document.getElementById('menu');
+			const overlay = document.getElementById('overlay');
+			const links = document.querySelectorAll('.menu a');
+
+			// Toggle menu and overlay with smooth transition
+			menu.classList.toggle('show');
+			overlay.classList.toggle('show');
+
+			// Classy staggered animation for links
+			links.forEach((link, index) => {
+				setTimeout(() => {
+					link.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; // Smooth transition for links
+					link.style.transform = menu.classList.contains('show') ? 'translateX(0)' : 'translateX(20px)';
+					link.style.opacity = menu.classList.contains('show') ? '1' : '0';
+				}, index * 100); // Stagger delay for smooth classy effect
+			});
+		}
+	</script>
+
 
 </body>
+
 </html>
