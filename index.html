@@ -268,7 +268,6 @@
             font-family: 'Cursive', cursive;
             color: white;
             font-size: 1.2rem;
-            margin-bottom: 2rem;
         }
 
         @media (max-width: 768px) {
@@ -292,6 +291,16 @@
                 font-size: 1rem;
             }
         }
+		/* Refined Footer */
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 40px;
+            font-size: 0.9em;
+            border-top: 1px solid #ccc;
+            max-width: 900px;
+            margin: 40px auto 0;
+        }
     </style>
 </head>
 
@@ -307,22 +316,22 @@
                 <h1>Bijoy Mitra</h1>
                 <!-- Social Links Section -->
                 <div class="social-links">
-                    <a href="mailto:bijoymitra11@gmail.com" target="_blank" title="Email">
+                    <a href="mailto:bijoymitra11@gmail.com" title="Email">
                         <img src="https://super.abril.com.br/wp-content/uploads/2018/07/istock-510576580.jpg?crop=1&resize=1212,909" alt="Email">
                     </a>
-                    <a href="https://scholar.google.com/citations?hl=en&user=K5sHNxIAAAAJ&view_op=list_works&sortby=pubdate" target="_blank" title="GScholar">
+                    <a href="https://scholar.google.com/citations?hl=en&user=K5sHNxIAAAAJ&view_op=list_works&sortby=pubdate" title="GScholar">
                         <img src="https://banner2.cleanpng.com/20180503/slq/avdrvwzso.webp" alt="GScholar">
                     </a>
-                    <a href="https://www.scopus.com/authid/detail.uri?authorId=57813102100" target="_blank" title="Scopus">
+                    <a href="https://www.scopus.com/authid/detail.uri?authorId=57813102100" title="Scopus">
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHyim7li8FOQsWVEj1it-oZ6KY_9fdhP8EkA&s" alt="Scopus">
                     </a>
-                    <a href="https://orcid.org/0000-0002-3008-831X" target="_blank" title="ORCID">
+                    <a href="https://orcid.org/0000-0002-3008-831X" title="ORCID">
                         <img src="https://static-00.iconduck.com/assets.00/orcid-icon-2048x2048-q87cnnge.png" alt="ORCID">
                     </a>
-                    <a href="https://github.com/MitraBijoy" target="_blank" title="GitHub">
+                    <a href="https://github.com/MitraBijoy" title="GitHub">
                         <img src="https://cdn.pixabay.com/photo/2022/01/30/13/33/github-6980894_960_720.png" alt="GitHub">
                     </a>
-                    <a href="https://linkedin.com/in/bijoy-mitra-673b4b17b" target="_blank" title="LinkedIn">
+                    <a href="https://linkedin.com/in/bijoy-mitra-673b4b17b" title="LinkedIn">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="LinkedIn">
                     </a>
                 </div>
@@ -424,30 +433,34 @@
                     <!--h2>Research Interests</h2-->
                     <div class="interest-cards">
                         <div class="interest-card">Climate Resilience</div>
-                        <div class="interest-card">GIS & Analysis</div>
+                        <div class="interest-card">Geospatial Modeling</div>
                         <div class="interest-card">Remote Sensing</div>
                         <div class="interest-card">Air Quality</div>
-                        <div class="interest-card">Land Use</div>
-                        <div class="interest-card">Data Analysis</div>
+                        <div class="interest-card">Land Use Land Cover</div>
                     </div>
                 </section>
+				<footer>
+					© 2024 Bijoy Mitra | All Rights Reserved
+				</footer>
             </div>
         </div>
     </div>
 
+
     <!-- Floating Menu Button -->
-    <button class="floating-menu-button" onclick="toggleMenu()">:::</button>
+    <button class="floating-menu-button" onclick="toggleMenu()">⸬</button>
 
     <!-- Overlay -->
     <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <!-- Hidden Menu -->
     <div class="menu" id="menu">
-        <a href="mentors.html" target="_blank">My Mentors</a>
-        <a href="mitra_publications.html" target="_blank">Research Publications</a>
-        <a href="Sorry.html" target="_blank">Resources</a>
-        <a href="Sorry.html" target="_blank">Curriculum Vitae</a>
+        <a href="mentors.html">My Mentors</a>
+        <a href="mitra_publications.html">Research Publications</a>
+        <a href="Sorry.html">Resources</a>
+        <a href="Sorry.html">Curriculum Vitae</a>
     </div>
+
 
     <script>
 		function toggleMenu() {
@@ -462,7 +475,7 @@
 			// Classy staggered animation for links
 			links.forEach((link, index) => {
 				setTimeout(() => {
-					link.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; // Smooth transition for links
+					link.style.transition = 'opacity 0.5s ease, transform 0.7s ease'; // Smooth transition for links
 					link.style.transform = menu.classList.contains('show') ? 'translateX(0)' : 'translateX(20px)';
 					link.style.opacity = menu.classList.contains('show') ? '1' : '0';
 				}, index * 100); // Stagger delay for smooth classy effect
